@@ -1,0 +1,43 @@
+<html>
+<head>
+
+<title>Calculator</title>
+<style>
+table {
+	margin: auto;
+     width: 50%;
+     border: 3px solid green;
+     background-color: #b0e0e6;
+    padding: 10px;
+}
+.alignright{
+	text-align: right;
+}
+</style>
+</head>
+<body BGCOLOR=#103E26>
+
+<table>
+<tr>
+<td>
+<h1> Basic Calculator</h1>
+<form method="post" action="Calculator.jsp">
+Number 1 : <input type="text" name="num1" class="alignright"> <br/><br/>
+Number 2 : <input type="text" name="num2" class="alignright"> <br/><br/>
+Operator :
+
+
+<br/><br/>
+<input type="radio" name="r1" value="Add" checked="checked">+ (Addition)	
+<input type="radio" name="r1" value="Sub">- (Subtraction)<br/>
+<input type="radio" name="r1" value="Mul">* (Multiplication)	
+<input type="radio" name="r1" value="Div">/ (Division)<br/><br/>
+
+<input type="submit" value="Calculate">
+</form>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

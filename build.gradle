@@ -1,0 +1,85 @@
+plugins {
+	id "com.gradle.plugin-publish" version "0.9.9"
+	id "org.sonarqube" version "2.5"
+	//id "java"
+	id "war"
+}
+
+apply plugin: JavaPlugin//'java'
+//apply plugin: 'war'
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+configurations {
+	moreLibs
+}
+
+repositories {
+	flatDir { dirs "lib" }
+	mavenLocal()
+	mavenCentral()
+	jcenter()
+	maven {
+    	url "https://maven.google.com"
+  	}
+  	maven {
+    	url "https://repox.sonarsource.com/sonarsource"
+  	}
+}
+
+dependencies {
+	compile group:'javax.servlet',name:'servlet-api', version:'2.5'
+	compile 'org.sonarsource.scanner.api:sonar-scanner-api:2.9.0.887'
+    compile "junit:junit:4.12"
+}
+
+
+
+clean {
+	doLast {
+        println 'cleaned previous build'
+    }
+}
+
+compileJava {
+    doLast {
+        println 'compiling source'
+    }
+}
+
+sonarqube {
+	pluginBundle {
+  		mavenCoordinates {
+  			groupId = project.group
+  			artifactId = "sonarqube-gradle-plugin"
+  		}
+	}
+}
+/*
+task compileTest(dependsOn: compileJava) {
+    doLast {
+        println 'compiling unit tests'
+    }
+}
+*/
+test {
+    doLast {
+        println 'running unit tests'
+    }
+}
+
+
+war {
+	archiveName 'Calculator.war'
+	webAppDir
+}
+
+
+task copyTask(type: Copy) {
+    from 'C:\\GradleExample\\Calculator-Gradle\\build\\libs'
+    into 'C:\\apache-tomcat-7.0.82\\webapps'
+}
+copyTask.dependsOn(war)
+
+
